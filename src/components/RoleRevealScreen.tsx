@@ -45,7 +45,12 @@ export const RoleRevealScreen: React.FC = () => {
                             color: 'var(--neon-red)'
                         }}>
                             <h1 style={{ fontSize: '3rem', margin: 0, textShadow: '0 0 10px var(--neon-red)' }}>IMPOSTOR</h1>
-                            <p style={{ marginTop: '1rem', color: '#fff' }}>Engaña a los demás.</p>
+                            {state.impostorKnowsCategory && state.realCategoryName && (
+                                <p style={{ fontSize: '1.2rem', color: '#fff', marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+                                    Categoría: <strong>{state.realCategoryName}</strong>
+                                </p>
+                            )}
+                            <p style={{ marginTop: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>Engaña a los demás.</p>
                         </div>
                     ) : (
                         <div style={{

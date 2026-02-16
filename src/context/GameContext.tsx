@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, type ReactNode, useContext } from 'react';
 import type { GameState, GameAction, Player, GamePhase } from '../types';
-import { getRandomWord } from '../data/words';
+import { getRandomWord, baseCategories, CATEGORIES } from '../data/words';
 
 const initialState: GameState = {
     phase: 'WELCOME',
@@ -38,13 +38,37 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
 
         case 'START_GAME':
             // 1. Assign Roles
-            const { categoryId, customWord } = action.payload;
+            const { categoryId, customWord, impostorKnowsCategory } = action.payload;
             const totalPlayers = state.players.length;
             const impostorCount = state.impostorCount;
 
             let secretWord = customWord || '';
+            let currentCategoryName = '';
+            let realCategoryName = '';
+
+            // Handle CATEGORY SELECTION
             if (!customWord) {
-                secretWord = getRandomWord(categoryId);
+                if (categoryId === 'all') {
+                    // Pick a random category from baseCategories
+                    const randomCatIndex = Math.floor(Math.random() * baseCategories.length);
+                    const selectedCat = baseCategories[randomCatIndex];
+
+                    // Pick word from that category
+                    const randomWordIndex = Math.floor(Math.random() * selectedCat.words.length);
+                    secretWord = selectedCat.words[randomWordIndex];
+
+                    currentCategoryName = 'Todas';
+                    realCategoryName = selectedCat.name;
+                } else {
+                    // Normal behavior
+                    secretWord = getRandomWord(categoryId);
+                    const cat = CATEGORIES.find(c => c.id === categoryId);
+                    currentCategoryName = cat ? cat.name : '';
+                    realCategoryName = currentCategoryName;
+                }
+            } else {
+                currentCategoryName = 'Personalizado';
+                realCategoryName = 'Personalizado';
             }
 
             // Create array of roles
@@ -76,6 +100,9 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
                 players: playersWithRoles,
                 secretWord,
                 revealIndex: 0,
+                impostorKnowsCategory: !!impostorKnowsCategory,
+                realCategoryName,
+                currentCategory: CATEGORIES.find(c => c.id === categoryId) || null
             };
 
         case 'NEXT_REVEAL':

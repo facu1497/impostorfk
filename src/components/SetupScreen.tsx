@@ -9,6 +9,7 @@ export const SetupScreen: React.FC = () => {
     const [newPlayerName, setNewPlayerName] = useState('');
     const [categoryId, setCategoryId] = useState(CATEGORIES[0].id);
     const [customWord, setCustomWord] = useState('');
+    const [impostorKnowsCategory, setImpostorKnowsCategory] = useState(false);
 
     const handleAddPlayer = (e: React.FormEvent) => {
         e.preventDefault();
@@ -24,7 +25,8 @@ export const SetupScreen: React.FC = () => {
             type: 'START_GAME',
             payload: {
                 categoryId,
-                customWord: categoryId === 'custom' ? customWord : undefined
+                customWord: categoryId === 'custom' ? customWord : undefined,
+                impostorKnowsCategory: categoryId === 'all' ? impostorKnowsCategory : undefined
             }
         });
     };
@@ -89,6 +91,18 @@ export const SetupScreen: React.FC = () => {
                         <option key={cat.id} value={cat.id}>{cat.name}</option>
                     ))}
                 </select>
+
+                {categoryId === 'all' && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                        <input
+                            type="checkbox"
+                            checked={impostorKnowsCategory}
+                            onChange={(e) => setImpostorKnowsCategory(e.target.checked)}
+                            style={{ width: 'auto', margin: 0 }}
+                        />
+                        <label style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Impostor conoce la categoría</label>
+                    </div>
+                )}
 
                 {categoryId === 'custom' && (
                     <Input

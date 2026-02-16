@@ -95,7 +95,7 @@ const football_teams: Category = {
     ]
 };
 
-const baseCategories = [objects, places, professions, food, animals, sports, football_teams];
+export const baseCategories = [objects, places, professions, food, animals, sports, football_teams];
 
 export const CATEGORIES: Category[] = [
     ...baseCategories,
