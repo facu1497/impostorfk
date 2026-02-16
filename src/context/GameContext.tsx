@@ -3,7 +3,7 @@ import type { GameState, GameAction, Player, GamePhase } from '../types';
 import { getRandomWord } from '../data/words';
 
 const initialState: GameState = {
-    phase: 'SETUP',
+    phase: 'WELCOME',
     players: [],
     impostorCount: 1,
     currentCategory: null,
@@ -14,6 +14,9 @@ const initialState: GameState = {
 
 const gameReducer = (state: GameState, action: GameAction): GameState => {
     switch (action.type) {
+        case 'START_SETUP':
+            return { ...state, phase: 'SETUP' };
+
         case 'ADD_PLAYER':
             const newPlayer: Player = {
                 id: crypto.randomUUID(),
@@ -135,9 +138,9 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
         case 'RESET_GAME':
             return {
                 ...initialState,
+                phase: 'SETUP', // Don't go back to welcome screen
                 players: state.players.map(p => ({ ...p, role: 'citizen', votesReceived: 0, isAlive: true }))
             };
-
         default:
             return state;
     }

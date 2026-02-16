@@ -15,6 +15,7 @@ export interface Category {
 }
 
 export type GamePhase =
+  | 'WELCOME'
   | 'SETUP'
   | 'ROLE_REVEAL'
   | 'ROUND_IN_PROGRESS'
@@ -39,6 +40,7 @@ export interface GameContextType {
 }
 
 export type GameAction =
+  | { type: 'START_SETUP' }
   | { type: 'ADD_PLAYER'; payload: string }
   | { type: 'REMOVE_PLAYER'; payload: string }
   | { type: 'SET_IMPOSTOR_COUNT'; payload: number }

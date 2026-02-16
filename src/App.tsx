@@ -1,4 +1,5 @@
 import { GameProvider, useGame } from './context/GameContext';
+import { WelcomeScreen } from './components/WelcomeScreen';
 import { SetupScreen } from './components/SetupScreen';
 import { RoleRevealScreen } from './components/RoleRevealScreen';
 import { GameScreen } from './components/GameScreen';
@@ -11,6 +12,8 @@ const GameController = () => {
 
     // Simple routing based on phase
     switch (state.phase) {
+        case 'WELCOME':
+            return <WelcomeScreen />;
         case 'SETUP':
             return <SetupScreen />;
         case 'ROLE_REVEAL':
