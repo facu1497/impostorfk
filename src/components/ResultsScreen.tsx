@@ -47,19 +47,18 @@ export const ResultsScreen: React.FC = () => {
                 position: 'relative',
                 zIndex: 2
             }}>
-                {citizensWin && (
+                {citizensWin ? (
                     <>
                         <img
                             src={`${import.meta.env.BASE_URL}police-car.png`}
                             alt="Police Car"
                             style={{
                                 position: 'absolute',
-                                left: '-100px',
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                width: '150px',
-                                zIndex: 1,
-                                filter: 'drop-shadow(0 0 10px rgba(0,0,255,0.5))'
+                                left: '0px',
+                                bottom: '0px',
+                                width: '120px',
+                                zIndex: 3,
+                                filter: 'drop-shadow(0 0 10px rgba(94, 94, 99, 0.12))'
                             }}
                         />
                         <img
@@ -67,19 +66,46 @@ export const ResultsScreen: React.FC = () => {
                             alt="Police Officer"
                             style={{
                                 position: 'absolute',
-                                right: '-80px',
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                height: '200px',
-                                zIndex: 1,
-                                filter: 'drop-shadow(0 0 10px rgba(0,0,255,0.5))'
+                                right: '0px',
+                                bottom: '10px',
+                                height: '180px',
+                                zIndex: 3,
+                                filter: 'drop-shadow(0 0 10px rgba(94, 94, 99, 0.12))'
+                            }}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <img
+                            src={`${import.meta.env.BASE_URL}money-bag.png`}
+                            alt="Money Bag"
+                            style={{
+                                position: 'absolute',
+                                left: '0px',
+                                bottom: '0px',
+                                width: '120px',
+                                zIndex: 3,
+                                filter: 'drop-shadow(0 0 10px rgba(94, 94, 99, 0.12))'
+                            }}
+                        />
+                        <img
+                            src={`${import.meta.env.BASE_URL}mafioso.png`}
+                            alt="Mafioso"
+                            style={{
+                                position: 'absolute',
+                                right: '0px',
+                                bottom: '10px',
+                                height: '180px',
+                                zIndex: 3,
+                                filter: 'drop-shadow(0 0 10px rgba(94, 94, 99, 0.12))'
                             }}
                         />
                     </>
                 )}
 
                 <h3 style={{ color: 'var(--neon-blue)' }}>REVELACIONES</h3>
-                <p>Palabra Secreta: <strong>{state.secretWord}</strong></p>
+                <p style={{ marginBottom: '0.5rem' }}>Palabra Secreta:</p>
+                <p style={{ fontSize: '1.5rem', marginTop: '0' }}><strong>{state.secretWord}</strong></p>
                 <div style={{ marginTop: '1rem' }}>
                     <p>Impostores:</p>
                     <ul style={{ listStyle: 'none', padding: 0 }}>
