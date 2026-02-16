@@ -18,17 +18,19 @@ export const ResultsScreen: React.FC = () => {
     const allImpostors = state.players.filter(p => p.role === 'impostor');
 
     return (
-        <div className="glass-panel" style={{ textAlign: 'center' }}>
+        <div className="glass-panel" style={{ textAlign: 'center', position: 'relative' }}>
             <h1 style={{
                 color: citizensWin ? 'var(--neon-green)' : 'var(--neon-red)',
                 textShadow: citizensWin ? '0 0 20px var(--neon-green)' : '0 0 20px var(--neon-red)',
                 fontSize: '3rem',
-                marginBottom: '1rem'
+                marginBottom: '1rem',
+                position: 'relative',
+                zIndex: 2
             }}>
                 {citizensWin ? '¡CIUDADANOS GANAN!' : '¡IMPOSTORES GANAN!'}
             </h1>
 
-            <div style={{ marginBottom: '2rem' }}>
+            <div style={{ marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
                 <p style={{ fontSize: '1.2rem', color: 'var(--text-secondary)' }}>
                     {citizensWin
                         ? "¡Todos los impostores han sido eliminados!"
@@ -41,8 +43,41 @@ export const ResultsScreen: React.FC = () => {
                 padding: '1rem',
                 borderRadius: '16px',
                 marginBottom: '2rem',
-                border: '1px solid rgba(255,255,255,0.1)'
+                border: '1px solid rgba(255,255,255,0.1)',
+                position: 'relative',
+                zIndex: 2
             }}>
+                {citizensWin && (
+                    <>
+                        <img
+                            src={`${import.meta.env.BASE_URL}police-car.png`}
+                            alt="Police Car"
+                            style={{
+                                position: 'absolute',
+                                left: '-100px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                width: '150px',
+                                zIndex: 1,
+                                filter: 'drop-shadow(0 0 10px rgba(0,0,255,0.5))'
+                            }}
+                        />
+                        <img
+                            src={`${import.meta.env.BASE_URL}police-officer.png`}
+                            alt="Police Officer"
+                            style={{
+                                position: 'absolute',
+                                right: '-80px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                height: '200px',
+                                zIndex: 1,
+                                filter: 'drop-shadow(0 0 10px rgba(0,0,255,0.5))'
+                            }}
+                        />
+                    </>
+                )}
+
                 <h3 style={{ color: 'var(--neon-blue)' }}>REVELACIONES</h3>
                 <p>Palabra Secreta: <strong>{state.secretWord}</strong></p>
                 <div style={{ marginTop: '1rem' }}>
@@ -57,7 +92,7 @@ export const ResultsScreen: React.FC = () => {
                 </div>
             </div>
 
-            <Button onClick={() => dispatch({ type: 'RESET_GAME' })}>
+            <Button onClick={() => dispatch({ type: 'RESET_GAME' })} style={{ position: 'relative', zIndex: 2 }}>
                 JUGAR DE NUEVO
             </Button>
         </div>
