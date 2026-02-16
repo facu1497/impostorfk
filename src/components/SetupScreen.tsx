@@ -129,7 +129,7 @@ export const SetupScreen: React.FC = () => {
                 </p>
                 <div style={{ marginTop: '-0.5rem' }}> {/* Negative margin to pull logo up */}
                     <img
-                        src="/logo.png"
+                        src={`${import.meta.env.BASE_URL}logo.png`}
                         alt="Klaims Logo"
                         style={{
                             height: '140px',
