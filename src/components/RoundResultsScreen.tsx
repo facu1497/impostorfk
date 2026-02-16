@@ -25,18 +25,51 @@ export const RoundResultsScreen: React.FC = () => {
                 padding: '2rem',
                 border: '1px solid rgba(255,255,255,0.1)',
                 borderRadius: '16px',
-                background: 'rgba(0,0,0,0.3)',
-                marginBottom: '2rem'
+                background: 'rgba(0,0,0,0.6)', // Darker background for image contrast
+                marginBottom: '2rem',
+                position: 'relative',
+                overflow: 'hidden',
+                minHeight: '300px', // Ensure enough space for the image
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center'
             }}>
-                <p style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>Su rol era:</p>
-                <h2 style={{
-                    color: wasImpostor ? 'var(--neon-red)' : 'var(--neon-green)',
-                    fontSize: '2.5rem',
-                    margin: 0,
-                    textShadow: wasImpostor ? '0 0 15px var(--neon-red)' : '0 0 15px var(--neon-green)'
-                }}>
-                    {wasImpostor ? 'IMPOSTOR' : 'CIUDADANO'}
-                </h2>
+                {/* Background Image - Only for Citizens as requested */}
+                {!wasImpostor && (
+                    <img
+                        src={`${import.meta.env.BASE_URL}citizen-reveal.png`}
+                        alt="Citizen Reveal"
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center top',
+                            opacity: 0.4, // Keep it subtle behind text
+                            zIndex: 1
+                        }}
+                    />
+                )}
+
+                <div style={{ position: 'relative', zIndex: 2 }}>
+                    <p style={{ marginBottom: '1rem', color: '#fff', fontSize: '1.5rem', fontWeight: 500 }}>Su rol era:</p>
+                    <h2 style={{
+                        color: wasImpostor ? 'var(--neon-red)' : 'var(--neon-green)',
+                        fontSize: '4rem', // Bigger impact
+                        margin: 0,
+                        fontWeight: 900,
+                        letterSpacing: '4px',
+                        textShadow: wasImpostor
+                            ? '0 0 20px var(--neon-red), 0 0 40px var(--neon-red)'
+                            : '0 0 20px var(--neon-green), 0 0 40px var(--neon-green)'
+                    }}>
+                        {wasImpostor ? 'IMPOSTOR' : 'CIUDADANO'}
+                    </h2>
+                </div>
             </div>
 
             <p style={{ marginBottom: '2rem', fontStyle: 'italic', color: 'var(--text-secondary)' }}>

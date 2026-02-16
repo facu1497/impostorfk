@@ -102,7 +102,8 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
                 revealIndex: 0,
                 impostorKnowsCategory: !!impostorKnowsCategory,
                 realCategoryName,
-                currentCategory: CATEGORIES.find(c => c.id === categoryId) || null
+                currentCategory: CATEGORIES.find(c => c.id === categoryId) || null,
+                selectedCategoryId: categoryId
             };
 
         case 'NEXT_REVEAL':
@@ -165,8 +166,12 @@ const gameReducer = (state: GameState, action: GameAction): GameState => {
         case 'RESET_GAME':
             return {
                 ...initialState,
-                phase: 'SETUP', // Don't go back to welcome screen
-                players: state.players.map(p => ({ ...p, role: 'citizen', votesReceived: 0, isAlive: true }))
+                phase: 'SETUP',
+                players: state.players.map(p => ({ ...p, role: 'citizen', votesReceived: 0, isAlive: true })),
+                // Persist settings
+                impostorCount: state.impostorCount,
+                selectedCategoryId: state.selectedCategoryId,
+                impostorKnowsCategory: state.impostorKnowsCategory
             };
         default:
             return state;

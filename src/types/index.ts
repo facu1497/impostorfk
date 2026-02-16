@@ -34,6 +34,7 @@ export interface GameState {
   lastVotedPlayer?: Player;
   impostorKnowsCategory?: boolean; // New flag
   realCategoryName?: string; // For 'All' category hint
+  selectedCategoryId?: string; // Persist user selection ('all', 'custom', or specific id)
 }
 
 export interface GameContextType {

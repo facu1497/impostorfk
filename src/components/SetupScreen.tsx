@@ -7,9 +7,9 @@ import { CATEGORIES } from '../data/words';
 export const SetupScreen: React.FC = () => {
     const { state, dispatch } = useGame();
     const [newPlayerName, setNewPlayerName] = useState('');
-    const [categoryId, setCategoryId] = useState(CATEGORIES[0].id);
+    const [categoryId, setCategoryId] = useState(state.selectedCategoryId || CATEGORIES[0].id);
     const [customWord, setCustomWord] = useState('');
-    const [impostorKnowsCategory, setImpostorKnowsCategory] = useState(false);
+    const [impostorKnowsCategory, setImpostorKnowsCategory] = useState(state.impostorKnowsCategory || false);
 
     const handleAddPlayer = (e: React.FormEvent) => {
         e.preventDefault();
