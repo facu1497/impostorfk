@@ -61,8 +61,7 @@ export const RoleRevealScreen: React.FC = () => {
                             marginBottom: '2rem',
                             color: 'var(--neon-green)'
                         }}>
-                            <h1 style={{ fontSize: '3rem', margin: 0, textShadow: '0 0 10px var(--neon-green)' }}>CIUDADANO</h1>
-                            <p style={{ marginTop: '1rem', fontSize: '1.5rem', color: '#fff' }}>Palabra: <strong>{state.secretWord}</strong></p>
+                            <h1 style={{ fontSize: '3rem', margin: 0, textShadow: '0 0 10px var(--neon-green)' }}>{state.secretWord}</h1>
                         </div>
                     )}
 

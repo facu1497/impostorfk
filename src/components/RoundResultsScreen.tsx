@@ -67,7 +67,7 @@ export const RoundResultsScreen: React.FC = () => {
                             ? '0 0 20px var(--neon-red), 0 0 40px var(--neon-red)'
                             : '0 0 20px var(--neon-green), 0 0 40px var(--neon-green)'
                     }}>
-                        {wasImpostor ? 'IMPOSTOR' : 'CIUDADANO'}
+                        {wasImpostor ? 'IMPOSTOR' : state.secretWord}
                     </h2>
                 </div>
             </div>
